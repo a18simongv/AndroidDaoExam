@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class Database {
 
+    /*//singleton database
     private static SQLiteDatabase db = null;
 
     public static synchronized void createInstace(Context context) {
@@ -15,7 +16,7 @@ public class Database {
     public static SQLiteDatabase getInstance(Context context) {
         if(db==null) createInstace(context);
         return db;
-    }
+    }*/
 
-    private Database() {}
+    //return daos -- static methods
 }
