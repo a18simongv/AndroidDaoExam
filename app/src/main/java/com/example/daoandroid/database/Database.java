@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 public class Database {
+
     private static SQLiteDatabase db = null;
 
     public static synchronized void createInstace(Context context) {

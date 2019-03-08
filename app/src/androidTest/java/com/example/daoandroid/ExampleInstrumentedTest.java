@@ -1,6 +1,7 @@
 package com.example.daoandroid;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -27,15 +28,21 @@ public class ExampleInstrumentedTest {
         assertEquals("com.example.daoandroid", appContext.getPackageName());
     }
 
-    @Before
-    
-
     @Test
     public void testSingleton() {
 
-        boolean flag;
+//        boolean flag;
 
-        Database database = Database.getInstance();
+        Context context = InstrumentationRegistry.getTargetContext();
+        SQLiteDatabase database = Database.getInstance( context );
+        SQLiteDatabase database2 = Database.getInstance( context );
 
+//        if(database!=null) {
+//            flag = true;
+//        } else {
+//            flag = false;
+//        }
+
+        assertEquals(database,database2);
     }
 }
