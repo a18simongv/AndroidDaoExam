@@ -4,6 +4,9 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.example.daoandroid.database.Database;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,5 +25,17 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.example.daoandroid", appContext.getPackageName());
+    }
+
+    @Before
+    
+
+    @Test
+    public void testSingleton() {
+
+        boolean flag;
+
+        Database database = Database.getInstance();
+
     }
 }
