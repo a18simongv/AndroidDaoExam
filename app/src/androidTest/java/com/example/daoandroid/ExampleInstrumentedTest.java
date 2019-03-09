@@ -6,6 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.daoandroid.database.Database;
+import com.example.daoandroid.database.dao.daoimp.DaoImp;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,20 +30,12 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testSingleton() {
+    public void testLastRow() {
 
 //        boolean flag;
 
         Context context = InstrumentationRegistry.getTargetContext();
-        SQLiteDatabase database = Database.getInstance( context );
-        SQLiteDatabase database2 = Database.getInstance( context );
 
-//        if(database!=null) {
-//            flag = true;
-//        } else {
-//            flag = false;
-//        }
-
-        assertEquals(database,database2);
+        assertEquals(0, DaoImp.getDaoModel(context).getLastRow("algo"));
     }
 }

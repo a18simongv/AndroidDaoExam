@@ -1,8 +1,10 @@
 package com.example.daoandroid.database.models;
 
+import com.example.daoandroid.database.dao.daoimp.DaoImp;
+
 import java.sql.Date;
 
-public class Flights {
+public class Flight {
 
     //identifier autoincrement
     private int id;
@@ -14,22 +16,14 @@ public class Flights {
     //plane do it
     private Plane plane;
 
-    public Flights(int id, Date dateInit, Date dateFin, double fuel, double baggage, String numberPlate) {
-        this.id = id;
-        this.dateInit = dateInit;
-        this.dateFin = dateFin;
-        this.fuel = fuel;
-        this.baggage = baggage;
-        //plane = dao.getById()
-    }
-    public Flights(Date dateInit, Date dateFin, double fuel, double baggage, Plane plane) {
+    public Flight(Date dateInit, Date dateFin, double fuel, double baggage, Plane plane) {
         this.dateInit = dateInit;
         this.dateFin = dateFin;
         this.fuel = fuel;
         this.baggage = baggage;
         this.plane = plane;
     }
-    public Flights(int id, Date dateInit, Date dateFin, double fuel, double baggage, Plane plane) {
+    public Flight(int id, Date dateInit, Date dateFin, double fuel, double baggage, Plane plane) {
         this.id = id;
         this.dateInit = dateInit;
         this.dateFin = dateFin;

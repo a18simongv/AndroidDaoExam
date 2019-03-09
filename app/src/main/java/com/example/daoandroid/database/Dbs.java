@@ -60,14 +60,14 @@ public class Dbs extends SQLiteOpenHelper {
             "cg INTEGER not null," +
             "name_model VARCHAR (50) REFERENCES models (id) not null," +
             "mass DOUBLE," +
-            "primary key (cg,id_model)" +
+            "primary key (cg,name_model)" +
             ");";
     private final String tableSeatRows = "CREATE TABLE seat_rows (" +
             "num_row INTEGER," +
             "name_model VARCHAR (50) REFERENCES models (id) ," +
             "num_seats INTEGER," +
             "row_arm DOUBLE," +
-            "PRIMARY KEY (num_row,id_model)" +
+            "PRIMARY KEY (num_row,name_model)" +
             ");";
     private final String tableFlights = "CREATE TABLE flights (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -78,6 +78,7 @@ public class Dbs extends SQLiteOpenHelper {
             "baggage DOUBLE" +
             ");";
     private final String tablePassengers = "CREATE TABLE passengers (" +
+            "name_model varchar (50) REFERENCES models (name_model)," +
             "seat_row INTEGER REFERENCES seat_rows (num_row)," +
             "id_flight INTEGER REFERENCES flights (id)," +
             "weight DOUBLE," +

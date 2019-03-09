@@ -8,12 +8,6 @@ public class Plane {
     //model of plane
     private Model model;
 
-
-    public Plane(String numberPlate, String modelName) {
-        this.numberPlate = numberPlate;
-        //dao model getModelById(String modelName)
-
-    }
     public Plane(String numberPlate, Model model) {
         this.numberPlate = numberPlate;
         this.model = model;

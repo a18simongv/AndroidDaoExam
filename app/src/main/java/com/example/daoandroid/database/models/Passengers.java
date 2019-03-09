@@ -3,22 +3,23 @@ package com.example.daoandroid.database.models;
 public class Passengers {
 
     //compose id - seatRow flight
-    private int seatRow, flight;
+    private int flight;
+    private SeatRow seatRow;
 
     //weigh of row
     private double weigh;
 
     public Passengers() {}
-    public Passengers(int seatRow, int flight, double weigh) {
+    public Passengers(SeatRow seatRow, int flight, double weigh) {
         this.seatRow = seatRow;
         this.flight = flight;
         this.weigh = weigh;
     }
 
-    public int getSeatRow() {
+    public SeatRow getSeatRow() {
         return seatRow;
     }
-    public void setSeatRow(int seatRow) {
+    public void setSeatRow(SeatRow seatRow) {
         this.seatRow = seatRow;
     }
     public int getFlight() {
