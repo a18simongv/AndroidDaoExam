@@ -1,6 +1,6 @@
 package com.example.daoandroid.database.models;
 
-public class Passengers {
+public class Passenger {
 
     //compose id - seatRow flight
     private int flight;
@@ -9,8 +9,8 @@ public class Passengers {
     //weigh of row
     private double weigh;
 
-    public Passengers() {}
-    public Passengers(SeatRow seatRow, int flight, double weigh) {
+    public Passenger() {}
+    public Passenger(SeatRow seatRow, int flight, double weigh) {
         this.seatRow = seatRow;
         this.flight = flight;
         this.weigh = weigh;

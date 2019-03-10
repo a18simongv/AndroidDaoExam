@@ -4,18 +4,20 @@ import java.sql.Date;
 
 public class Multimedia {
 
-    //compose id - idMult - idFlight
+    //compose id - idMult - idFlightt
     private int idMult, idFlight;
 
+    private String name;
     //date done
     private Date date;
     //type of multimedia
     private TypeMultimedia type;
 
     public Multimedia() {}
-    public Multimedia(int idMult, int idFlight, Date date, TypeMultimedia type) {
+    public Multimedia(int idMult, int idFlight, String name, Date date, TypeMultimedia type) {
         this.idMult = idMult;
         this.idFlight = idFlight;
+        this.name = name;
         this.date = date;
         this.type = type;
     }
@@ -26,10 +28,10 @@ public class Multimedia {
     public void setIdMult(int idMult) {
         this.idMult = idMult;
     }
-    public int getIdFlight() {
+    public int getidFlight() {
         return idFlight;
     }
-    public void setIdFlight(int idFlight) {
+    public void setidFlightt(int idFlightt) {
         this.idFlight = idFlight;
     }
     public Date getDate() {
@@ -44,5 +46,6 @@ public class Multimedia {
     public void setType(TypeMultimedia type) {
         this.type = type;
     }
-
+    public String getName() { return name;}
+    public void setName(String name) { this.name = name;}
 }

@@ -24,6 +24,17 @@ public class ModelImp implements ModelI {
     }
 
     @Override
+    public SeatRow getRow(String nameModel, int row) {
+        SeatRow seatRow = null;
+
+        Cursor cursor = database.rawQuery("select * from seat_rows where name_model=? and num_row=?",
+                new String[]{nameModel, String.valueOf(row)});
+        if (cursor.moveToFirst()) {
+            seatRow = new SeatRow(row,nameModel,cursor.getInt(2),cursor.getDouble(3));
+        }
+        return seatRow;
+    }
+    @Override
     public int getLastRow(String nameModel) {
         int rows = 0;
         Cursor cursor = database.rawQuery("select count() from seat_rows where name_model=?", new String[]{nameModel});
@@ -116,9 +127,9 @@ public class ModelImp implements ModelI {
         values.put("baggage_max",model.getBaggageMax());
         values.put("baggage_arm",model.getBaggageArm());
         values.put("basic_empty_weight",model.getBew());
-        values.put("basic_empty_weight",model.getBewArm());
+        values.put("basic_empty_weight_arm",model.getBewArm());
 
-        database.insert("Models",null,values);
+        long num = database.insert("models",null,values);
 
         return true;
     }

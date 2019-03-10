@@ -82,12 +82,13 @@ public class Dbs extends SQLiteOpenHelper {
             "seat_row INTEGER REFERENCES seat_rows (num_row)," +
             "id_flight INTEGER REFERENCES flights (id)," +
             "weight DOUBLE," +
-            "PRIMARY KEY (id_flight,seat_row)" +
+            "PRIMARY KEY (id_flight,seat_row,name_model)" +
             ");";
     private final String tableMultimedia = "CREATE TABLE multimedia (" +
             "id_multimedia INTEGER," +
             "id_flight INTEGER REFERENCES flights (id)," +
             "type INTEGER REFERENCES type_multimedia (id)," +
+            "name VARCHAR (50)," +
             "date DATETIME," +
             "PRIMARY KEY (id_flight,id_multimedia)" +
             ");";
