@@ -43,8 +43,8 @@ public class FlightImp implements FlightI {
         Cursor cursor = database.rawQuery("select * from multimedia where id_multimedia=? and id_flight=?",
                 new String[] { String.valueOf(idMult),String.valueOf(idFlight)});
         if (cursor.moveToFirst()) {
-            multimedia = new Multimedia(idMult, idFlight, cursor.getString(2),
-                    cursor.getInt(3), DaoImp.getDaoTypeMult(context).getById( cursor.getInt(4) ) );
+            multimedia = new Multimedia(idMult, idFlight, cursor.getString(3),
+                    cursor.getInt(4), DaoImp.getDaoTypeMult(context).getById( cursor.getInt(2) ) );
         }
 
         return multimedia;

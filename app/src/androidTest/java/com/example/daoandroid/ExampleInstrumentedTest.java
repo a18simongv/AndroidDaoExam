@@ -9,12 +9,15 @@ import android.util.Log;
 import com.example.daoandroid.database.dao.daoimp.DaoImp;
 import com.example.daoandroid.database.dao.daoimp.FlightImp;
 import com.example.daoandroid.database.dao.daoimp.ModelImp;
+import com.example.daoandroid.database.dao.daoimp.TypeMultimediaImp;
 import com.example.daoandroid.database.dao.ints.DaoI;
 import com.example.daoandroid.database.dao.ints.ModelI;
 import com.example.daoandroid.database.models.CgMass;
 import com.example.daoandroid.database.models.Flight;
 import com.example.daoandroid.database.models.Model;
+import com.example.daoandroid.database.models.Multimedia;
 import com.example.daoandroid.database.models.Plane;
+import com.example.daoandroid.database.models.TypeMultimedia;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,25 +44,48 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    public void testMultimedias() {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+        boolean flag = false;
+
+        FlightImp daoFlg = DaoImp.getDaoFlight(context);
+        TypeMultimediaImp daoType = DaoImp.getDaoTypeMult(context);
+
+//        TypeMultimedia type = new TypeMultimedia("audio", "pathprueba");
+//        daoType.insert(type);
+
+        Multimedia mult = new Multimedia(1, "something", (new Date()).getTime(), daoType.getById(1));
+//        daoFlg.insertMultimedia(mult);
+
+        Multimedia aux = daoFlg.getMultimedia(1, 1);
+
+        if (aux.getName().equals(mult.getName()))
+            flag = true;
+
+        assertEquals(true, flag);
+    }
+
+    @Test
     public void testCGmass() {
         Context context = InstrumentationRegistry.getTargetContext();
         boolean flag = false;
 
         ModelImp daoMod = DaoImp.getDaoModel(context);
 
-//        CgMass cgMass = new CgMass(85,"model-test-1",1234.3);
-//        CgMass cgMass2 = new CgMass(86,"model-test-1",1234.3);
+        CgMass cgMass = new CgMass(85, "model-test-1", 1234.3);
+        CgMass cgMass2 = new CgMass(86, "model-test-1", 1234.3);
 
 //        daoMod.insertCg(cgMass);
 //        daoMod.insertCg(cgMass2);
 
         List<CgMass> masses = daoMod.getCg("model-test-1");
 
-        if(masses.size()==2){
-            flag=true;
+        if (masses.size() == 2) {
+            flag = true;
         }
 
-        assertEquals(true,flag);
+        assertEquals(true, flag);
     }
 
     @Test
@@ -70,10 +96,10 @@ public class ExampleInstrumentedTest {
 
         FlightImp daoFlg = DaoImp.getDaoFlight(context);
 
-        Model model = new Model("model-test-1",1000,35,200,40,2000,120);
-        Plane plane = new Plane("12345",model);
+        Model model = new Model("model-test-1", 1000, 35, 200, 40, 2000, 120);
+        Plane plane = new Plane("12345", model);
 
-        Flight flight = new Flight( (new Date()).getTime(), (new Date()).getTime(),123,200,plane);
+        Flight flight = new Flight((new Date()).getTime(), (new Date()).getTime(), 123, 200, plane);
 
 //        DaoImp.getDaoModel(context).insert(model);
 //        DaoImp.getDaoPlane(context).insert(plane);
@@ -81,11 +107,11 @@ public class ExampleInstrumentedTest {
 
         Flight aux = daoFlg.getById(1);
 
-        if(aux.getPlane().getNumberPlate().equals( flight.getPlane().getNumberPlate() )){
+        if (aux.getPlane().getNumberPlate().equals(flight.getPlane().getNumberPlate())) {
             flag = true;
         }
 
-        assertEquals(true,flag);
+        assertEquals(true, flag);
     }
 
     @Test
@@ -95,14 +121,14 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void testDao(){
+    public void testDao() {
 
         Context context = InstrumentationRegistry.getTargetContext();
         boolean flag = false;
 
         //data to insert
-        Model model = new Model("model-test-1",1000,35,200,40,2000,120);
-        Plane plane = new Plane("12345",model);
+        Model model = new Model("model-test-1", 1000, 35, 200, 40, 2000, 120);
+        Plane plane = new Plane("12345", model);
 
         DaoImp.getDaoModel(context).insert(model);
         DaoImp.getDaoPlane(context).insert(plane);
@@ -114,10 +140,10 @@ public class ExampleInstrumentedTest {
 //        } --> correct
 
         Plane aux = DaoImp.getDaoPlane(context).getById("12345");
-        if(plane.getNumberPlate().equals( aux.getNumberPlate() )) {
+        if (plane.getNumberPlate().equals(aux.getNumberPlate())) {
             flag = true;
         }
 
-        assertEquals(true,flag);
+        assertEquals(true, flag);
     }
 }

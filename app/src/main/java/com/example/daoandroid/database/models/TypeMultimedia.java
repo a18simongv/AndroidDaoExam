@@ -11,6 +11,10 @@ public class TypeMultimedia {
     private String path;
 
     public TypeMultimedia() {}
+    public TypeMultimedia(String type, String path) {
+        this.type = type;
+        this.path = path;
+    }
     public TypeMultimedia(int id, String type, String path) {
         this.id = id;
         this.type = type;
