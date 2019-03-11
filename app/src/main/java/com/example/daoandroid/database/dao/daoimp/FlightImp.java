@@ -10,7 +10,7 @@ import com.example.daoandroid.database.dao.ints.FlightI;
 import com.example.daoandroid.database.models.Flight;
 import com.example.daoandroid.database.models.Multimedia;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class FlightImp implements FlightI {
                 new String[] { String.valueOf(idMult),String.valueOf(idFlight)});
         if (cursor.moveToFirst()) {
             multimedia = new Multimedia(idMult, idFlight, cursor.getString(2),
-                    Date.valueOf(cursor.getString(3)), DaoImp.getDaoTypeMult(context).getById( cursor.getInt(4) ) );
+                    cursor.getInt(3), DaoImp.getDaoTypeMult(context).getById( cursor.getInt(4) ) );
         }
 
         return multimedia;
@@ -56,7 +56,7 @@ public class FlightImp implements FlightI {
         Cursor cursor = database.rawQuery("select * from multimedia", null);
         if (cursor.moveToNext()) {
             Multimedia multimedia = new Multimedia(cursor.getInt(0), idFlight, cursor.getString(2),
-                    Date.valueOf(cursor.getString(3)), DaoImp.getDaoTypeMult(context).getById( cursor.getInt(4) ));
+                    cursor.getInt(3), DaoImp.getDaoTypeMult(context).getById( cursor.getInt(4) ));
             multimediaList.add(multimedia);
         }
 
@@ -73,7 +73,12 @@ public class FlightImp implements FlightI {
         values.put("date", multimedia.getDate().toString());
         values.put("name", multimedia.getName());
 
-        database.insert("multimedia",null,values);
+        long num = database.insert("multimedia",null,values);
+
+        if (num < 0) {
+            return false;
+        }
+
         return true;
     }
 
@@ -81,11 +86,11 @@ public class FlightImp implements FlightI {
     public Flight getById(Integer id) {
         Flight flight = null;
 
-        Cursor cursor = database.rawQuery("select * from Flights where id=?",new String[] { String.valueOf(id)});
+        Cursor cursor = database.rawQuery("select * from flights where id=?",new String[] { String.valueOf(id)});
         if (cursor.moveToFirst()) {
-            flight = new Flight(id, Date.valueOf(cursor.getString(1)),
-                    Date.valueOf(cursor.getString(2)), cursor.getDouble(3), cursor.getDouble(4),
-                    DaoImp.getDaoPlane(context).getById(cursor.getString(5)) );
+            flight = new Flight(id, cursor.getInt(2),
+                   cursor.getInt(3), cursor.getDouble(4), cursor.getDouble(5),
+                    DaoImp.getDaoPlane(context).getById(cursor.getString(1)) );
         }
 
         return flight;
@@ -95,11 +100,11 @@ public class FlightImp implements FlightI {
     public List<Flight> listAll() {
         List<Flight> flights = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select * from models", new String[]{});
+        Cursor cursor = database.rawQuery("select * from flights", new String[]{});
         while (cursor.moveToNext()) {
-            Flight flight = new Flight(cursor.getInt(0), Date.valueOf(cursor.getString(1)),
-                    Date.valueOf(cursor.getString(2)), cursor.getDouble(3), cursor.getDouble(4),
-                    DaoImp.getDaoPlane(context).getById(cursor.getString(5)) );
+            Flight flight = new Flight(cursor.getInt(0), cursor.getInt(2),
+                    cursor.getInt(3), cursor.getDouble(4), cursor.getDouble(5),
+                    DaoImp.getDaoPlane(context).getById(cursor.getString(1)) );
             flights.add(flight);
         }
 
@@ -117,7 +122,11 @@ public class FlightImp implements FlightI {
         values.put("fuel",flight.getFuel());
         values.put("baggage",flight.getBaggage());
 
-        database.insert("flights",null,values);
+        long num = database.insert("flights",null,values);
+
+        if (num < 0) {
+            return false;
+        }
 
         return true;
     }

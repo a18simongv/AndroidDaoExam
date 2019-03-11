@@ -72,8 +72,8 @@ public class Dbs extends SQLiteOpenHelper {
     private final String tableFlights = "CREATE TABLE flights (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "plane VARCHAR (50) REFERENCES planes (number_plate)," +
-            "date_init DATETIME," +
-            "date_fin DATETIME," +
+            "date_init INTEGER," +
+            "date_fin INTEGER," +
             "fuel DOUBLE," +
             "baggage DOUBLE" +
             ");";

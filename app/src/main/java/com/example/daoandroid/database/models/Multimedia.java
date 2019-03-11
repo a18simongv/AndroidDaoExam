@@ -1,6 +1,6 @@
 package com.example.daoandroid.database.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Multimedia {
 
@@ -14,11 +14,11 @@ public class Multimedia {
     private TypeMultimedia type;
 
     public Multimedia() {}
-    public Multimedia(int idMult, int idFlight, String name, Date date, TypeMultimedia type) {
+    public Multimedia(int idMult, int idFlight, String name, long date, TypeMultimedia type) {
         this.idMult = idMult;
         this.idFlight = idFlight;
         this.name = name;
-        this.date = date;
+        this.date = new Date(date);
         this.type = type;
     }
 

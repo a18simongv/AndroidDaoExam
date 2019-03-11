@@ -16,17 +16,17 @@ public class Flight {
     //plane do it
     private Plane plane;
 
-    public Flight(Date dateInit, Date dateFin, double fuel, double baggage, Plane plane) {
-        this.dateInit = dateInit;
-        this.dateFin = dateFin;
+    public Flight(long dateInit, long dateFin, double fuel, double baggage, Plane plane) {
+        this.dateInit = new Date(dateInit);
+        this.dateFin = new Date(dateFin);
         this.fuel = fuel;
         this.baggage = baggage;
         this.plane = plane;
     }
-    public Flight(int id, Date dateInit, Date dateFin, double fuel, double baggage, Plane plane) {
+    public Flight(int id, long dateInit, long dateFin, double fuel, double baggage, Plane plane) {
         this.id = id;
-        this.dateInit = dateInit;
-        this.dateFin = dateFin;
+        this.dateInit = new Date(dateInit);
+        this.dateFin = new Date(dateFin);
         this.fuel = fuel;
         this.baggage = baggage;
         this.plane = plane;
