@@ -14,19 +14,23 @@ public class Flight {
     //fuel and baggage charge
     private double fuel, baggage;
     //plane do it
-    private Plane plane;
+    private String plane;
 
-    public Flight(long dateInit, long dateFin, double fuel, double baggage, Plane plane) {
-        this.dateInit = new Date(dateInit);
-        this.dateFin = new Date(dateFin);
+
+    public Flight(String plane) {
+        this.plane = plane;
+    }
+    public Flight(Date dateInit, Date dateFin, double fuel, double baggage, String plane) {
+        this.dateInit = dateInit;
+        this.dateFin = dateFin;
         this.fuel = fuel;
         this.baggage = baggage;
         this.plane = plane;
     }
-    public Flight(int id, long dateInit, long dateFin, double fuel, double baggage, Plane plane) {
+    public Flight(int id, Date dateInit, Date dateFin, double fuel, double baggage, String plane) {
         this.id = id;
-        this.dateInit = new Date(dateInit);
-        this.dateFin = new Date(dateFin);
+        this.dateInit = dateInit;
+        this.dateFin = dateFin;
         this.fuel = fuel;
         this.baggage = baggage;
         this.plane = plane;
@@ -62,10 +66,10 @@ public class Flight {
     public void setBaggage(double baggage) {
         this.baggage = baggage;
     }
-    public Plane getPlane() {
+    public String getPlane() {
         return plane;
     }
-    public void setPlane(Plane plane) {
+    public void setPlane(String plane) {
         this.plane = plane;
     }
 

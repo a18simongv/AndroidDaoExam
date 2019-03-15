@@ -27,7 +27,7 @@ public class PlaneImp implements DaoI<Plane, String> {
         Plane plane = null;
         Cursor cursor = database.rawQuery("select * from planes where number_plate=?", new String[]{id});
         if (cursor.moveToFirst()) {
-            plane = new Plane(id, DaoImp.getDaoModel(context).getById(cursor.getString(1)));
+            plane = new Plane(id, cursor.getString(1));
         }
         return plane;
     }
@@ -38,7 +38,7 @@ public class PlaneImp implements DaoI<Plane, String> {
 
         Cursor cursor = database.rawQuery("select * from planes", new String[]{});
         while (cursor.moveToNext()) {
-            Plane plane = new Plane(cursor.getString(0), DaoImp.getDaoModel(context).getById(cursor.getString(1)));
+            Plane plane = new Plane(cursor.getString(0), cursor.getString(1));
             planes.add(plane);
         }
 
@@ -49,7 +49,7 @@ public class PlaneImp implements DaoI<Plane, String> {
     public boolean insert(Plane plane) {
         ContentValues values = new ContentValues();
         values.put("number_plate", plane.getNumberPlate());
-        values.put("name_model", plane.getModel().getNameModel());
+        values.put("name_model", plane.getModel());
 
         long num = database.insert("planes", null, values);
 

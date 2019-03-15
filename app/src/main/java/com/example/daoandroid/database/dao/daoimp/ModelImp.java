@@ -36,7 +36,7 @@ public class ModelImp implements ModelI {
     }
 
     @Override
-    public int getLastRow(String nameModel) {
+    public int getNumRow(String nameModel) {
         int rows = 0;
         Cursor cursor = database.rawQuery("select count() from seat_rows where name_model=?", new String[]{nameModel});
         if (cursor.moveToFirst()) {
@@ -48,8 +48,7 @@ public class ModelImp implements ModelI {
     @Override
     public boolean insertRow(SeatRow seatRow) {
         ContentValues values = new ContentValues();
-        int row = getLastRow(seatRow.getNameModel()) + 1;
-        values.put("num_row", row);
+        values.put("num_row", seatRow.getRow());
         values.put("name_model", seatRow.getNameModel());
         values.put("num_seats", seatRow.getNumberSeats());
         values.put("row_arm", seatRow.getRowArm());

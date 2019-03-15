@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">DaoAndroid</string>
+    <string name="strBtnRegisterFlight">Register flight</string>
+    <string name="strBtnSeeFlights">See flights</string>
+    <string name="strBtnResumeFlight">ResumeFlight</string>
+    <string name="strTvApp">Flights Planes</string>
+    <string name="strTvNewFlight">New flight</string>
+    <string name="strBtnNewPlane">New plane</string>
+    <string name="strEtFuel">Fuel</string>
+    <string name="strEtBaggage">Baggage</string>
+    <string name="strBtnStartFlight">Start flight</string>
+    <string name="strTvNewPlane">New plane</string>
+    <string name="strTvNumberPlate">Number plate</string>
+    <string name="strBtnCreatePlane">Create plane</string>
+    <string name="strTvOnFlight">On flight</string>
+    <string name="strBtnTakeAudio">Take audio</string>
+    <string name="strBtnTakePhoto">Take photo</string>
+    <string name="strBtnTakeVideo">Take video</string>
+    <string name="strBtnFinalize">Finalize</string>
+    <string name="strTvFlight">Flights</string>
 </resources>

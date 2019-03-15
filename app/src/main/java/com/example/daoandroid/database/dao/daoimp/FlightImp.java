@@ -4,14 +4,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.daoandroid.database.Dbs;
 import com.example.daoandroid.database.dao.ints.FlightI;
 import com.example.daoandroid.database.models.Flight;
 import com.example.daoandroid.database.models.Multimedia;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class FlightImp implements FlightI {
@@ -88,9 +90,9 @@ public class FlightImp implements FlightI {
 
         Cursor cursor = database.rawQuery("select * from flights where id=?",new String[] { String.valueOf(id)});
         if (cursor.moveToFirst()) {
-            flight = new Flight(id, cursor.getInt(2),
-                   cursor.getInt(3), cursor.getDouble(4), cursor.getDouble(5),
-                    DaoImp.getDaoPlane(context).getById(cursor.getString(1)) );
+            flight = new Flight(id, Date.valueOf(cursor.getString(2)),
+                    Date.valueOf(cursor.getString(3)), cursor.getDouble(4), cursor.getDouble(5),
+                    cursor.getString(1) );
         }
 
         return flight;
@@ -102,9 +104,9 @@ public class FlightImp implements FlightI {
 
         Cursor cursor = database.rawQuery("select * from flights", new String[]{});
         while (cursor.moveToNext()) {
-            Flight flight = new Flight(cursor.getInt(0), cursor.getInt(2),
-                    cursor.getInt(3), cursor.getDouble(4), cursor.getDouble(5),
-                    DaoImp.getDaoPlane(context).getById(cursor.getString(1)) );
+            Flight flight = new Flight(cursor.getInt(0),Date.valueOf(cursor.getString(2)),
+                    Date.valueOf(cursor.getString(3)), cursor.getDouble(4), cursor.getDouble(5),
+                    cursor.getString(1) );
             flights.add(flight);
         }
 
@@ -112,13 +114,32 @@ public class FlightImp implements FlightI {
     }
 
     @Override
+    public int lastFlight() {
+        int last = 0;
+
+        Cursor cursor = database.rawQuery("select count() from flights", new String[]{});
+        if (cursor.moveToFirst()) {
+            last = cursor.getInt(0);
+        }
+
+        return last;
+    }
+
+    @Override
+    public void finalizeFlight(int idFlight) {
+        ContentValues values = new ContentValues();
+        values.put("date_fin", (new Date(Calendar.getInstance().getTimeInMillis())).toString() );
+        database.update("flights",values,"id=?",new String[] {String.valueOf(idFlight)});
+    }
+
+    @Override
     public boolean insert(Flight flight) {
 
         //id autoincrement
         ContentValues values = new ContentValues();
-        values.put("plane",flight.getPlane().getNumberPlate());
+        values.put("plane",flight.getPlane());
         values.put("date_init",flight.getDateInit().toString());
-        values.put("date_fin",flight.getDateFin().toString());
+        values.put("date_fin",flight.getDateFin()==null? null : flight.getDateFin().toString());
         values.put("fuel",flight.getFuel());
         values.put("baggage",flight.getBaggage());
 

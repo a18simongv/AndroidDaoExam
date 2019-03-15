@@ -12,6 +12,9 @@ public class SeatRow {
     private double rowArm;
 
     public SeatRow() {}
+    public SeatRow(String nameModel) {
+        this.nameModel = nameModel;
+    }
     public SeatRow(int row, String nameModel, int numberSeats, double rowArm) {
         this.row = row;
         this.nameModel = nameModel;

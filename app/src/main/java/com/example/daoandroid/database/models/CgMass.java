@@ -10,6 +10,9 @@ public class CgMass {
     private double mass;
 
     public CgMass(){}
+    public CgMass(String nameModel) {
+        this.nameModel = nameModel;
+    }
     public CgMass(int cg, String nameModel, double mass) {
         this.cg = cg;
         this.nameModel = nameModel;

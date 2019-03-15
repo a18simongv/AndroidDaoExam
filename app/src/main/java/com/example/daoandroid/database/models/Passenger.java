@@ -7,13 +7,13 @@ public class Passenger {
     private SeatRow seatRow;
 
     //weigh of row
-    private double weigh;
+    private double weight;
 
     public Passenger() {}
-    public Passenger(SeatRow seatRow, int flight, double weigh) {
+    public Passenger(SeatRow seatRow, int flight, double weight) {
         this.seatRow = seatRow;
         this.flight = flight;
-        this.weigh = weigh;
+        this.weight = weight;
     }
 
     public SeatRow getSeatRow() {
@@ -29,10 +29,10 @@ public class Passenger {
         this.flight = flight;
     }
     public double getWeigh() {
-        return weigh;
+        return weight;
     }
     public void setWeigh(double weigh) {
-        this.weigh = weigh;
+        this.weight = weigh;
     }
 
 }

@@ -9,6 +9,8 @@ public interface FlightI extends DaoI<Flight,Integer> {
 
     int getLastMultimedia(int idFlight);
     Multimedia getMultimedia(int idFlight, int idMult);
+    int lastFlight();
+    void finalizeFlight(int idFlight);
     List<Multimedia> listMultimedia(int idFlight);
     boolean insertMultimedia(Multimedia multimedia);
 

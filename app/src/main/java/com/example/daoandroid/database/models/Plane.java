@@ -6,9 +6,9 @@ public class Plane {
     private String numberPlate;
 
     //model of plane
-    private Model model;
+    private String model;
 
-    public Plane(String numberPlate, Model model) {
+    public Plane(String numberPlate, String model) {
         this.numberPlate = numberPlate;
         this.model = model;
     }
@@ -20,10 +20,10 @@ public class Plane {
     public void setNumberPlate(String numberPlate) {
         this.numberPlate = numberPlate;
     }
-    public Model getModel() {
+    public String getModel() {
         return model;
     }
-    public void setModel(Model model) {
+    public void setModel(String model) {
         this.model = model;
     }
 }

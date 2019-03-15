@@ -12,7 +12,7 @@ public interface ModelI extends DaoI<Model,String> {
     List<SeatRow> getRows(String nameModel);
     List<CgMass> getCg(String nameModel);
 
-    int getLastRow(String nameModel);
+    int getNumRow(String nameModel);
 
     boolean insertRow(SeatRow seatRow);
     boolean insertCg(CgMass cgMass);

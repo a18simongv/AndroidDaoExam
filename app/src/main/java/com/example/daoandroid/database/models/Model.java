@@ -13,7 +13,10 @@ public class Model {
     private double bew, bewArm;
 
     public Model() {}
-    public Model(String nameModel,double fuelMax, double fuelArm, double baggageMax, double baggageArm, double bew, double bewArm) {
+    public Model(String nameModel) {
+        this.nameModel = nameModel;
+    }
+    public Model(String nameModel, double fuelMax, double fuelArm, double baggageMax, double baggageArm, double bew, double bewArm) {
         this.nameModel = nameModel;
         this.fuelMax = fuelMax;
         this.fuelArm = fuelArm;

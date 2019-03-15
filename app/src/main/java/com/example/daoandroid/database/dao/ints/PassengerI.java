@@ -8,6 +8,7 @@ import java.util.List;
 public interface PassengerI extends DaoI<Passenger, Flight> {
 
 
-    List<Passenger> listAll(Flight flight);
+    List<Passenger> listAll(int flight);
+    int numRows(String nameModel);
 
 }
