@@ -32,8 +32,10 @@ public class Information extends AppCompatActivity {
         tvData = findViewById(R.id.tvData);
         ivPhoto = findViewById(R.id.ivPhoto);
         spSeePlanes = findViewById(R.id.spSeePlanes);
+        spSeeFlights = findViewById(R.id.spSeeFlights);
 
         Utils.instanceSpinner(Utils.TYPE_SPINNER.PLANE, spSeePlanes, getApplicationContext());
+        Utils.instanceSpinner(Utils.TYPE_SPINNER.FLIGHT,spSeeFlights,getApplicationContext());
 
         spSeePlanes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

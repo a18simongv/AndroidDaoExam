@@ -36,8 +36,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -59,7 +60,6 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.daoandroid", appContext.getPackageName());
     }
-
 
     @Test
     public void testCGS() {
@@ -137,4 +137,16 @@ public class ExampleInstrumentedTest {
         assertEquals(true,flag);
     }
 
+    @Test
+    public void takeDate() {
+        Context context = InstrumentationRegistry.getTargetContext();
+        boolean flag = false;
+
+        Flight flight = DaoImp.getDaoFlight(context).getById(1);
+        if(flight != null) {
+            flag = true;
+        }
+
+        assertEquals(true,flag);
+    }
 }

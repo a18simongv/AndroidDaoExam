@@ -12,12 +12,17 @@ import android.widget.TextView;
 
 import com.example.daoandroid.R;
 import com.example.daoandroid.database.dao.daoimp.DaoImp;
+import com.example.daoandroid.database.dao.daoimp.ModelImp;
+import com.example.daoandroid.database.models.Flight;
 import com.example.daoandroid.database.models.Model;
+import com.example.daoandroid.database.models.Passenger;
 import com.example.daoandroid.database.models.Plane;
 import com.example.daoandroid.database.models.SeatRow;
 
+import java.sql.Date;
 import java.text.Format;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Flights extends AppCompatActivity {
@@ -31,7 +36,7 @@ public class Flights extends AppCompatActivity {
     private Plane plane;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flights);
 
@@ -41,6 +46,7 @@ public class Flights extends AppCompatActivity {
         etBaggage = findViewById(R.id.etBaggage);
         tvFly = findViewById(R.id.tvFly);
         btnFly = findViewById(R.id.btnFly);
+        btnSaveFlight = findViewById(R.id.btnSaveFlight);
 
         Intent intent = getIntent();
         numberPlate = intent.getStringExtra("Plane");
@@ -59,6 +65,54 @@ public class Flights extends AppCompatActivity {
                 tvFly.setText(strData);
             }
         });
+
+        btnSaveFlight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveFlight();
+            }
+        });
+    }
+
+    private void saveFlight() {
+        double fuel, baggage;
+        ModelImp modelImp;
+
+        try {
+            fuel = Double.parseDouble(etFuel.getText().toString());
+        } catch (Exception e) {
+            fuel = 0;
+        }
+        try {
+            baggage = Double.parseDouble(etBaggage.getText().toString());
+        } catch (Exception e) {
+            baggage = 0;
+        }
+
+        modelImp = DaoImp.getDaoModel(getApplicationContext());
+        Model model = modelImp.getById(plane.getModel());
+        if (fuel > model.getFuelMax())
+            return;
+        if (baggage > model.getBaggageMax())
+            return;
+
+        Date init;
+        try {
+            init = Date.valueOf(etDate.getText().toString());
+        } catch (Exception e) {
+            init = new Date(Calendar.getInstance().getTimeInMillis());
+        }
+        Flight flight = new Flight(init,null,fuel,baggage,numberPlate);
+        DaoImp.getDaoFlight(getApplicationContext()).insert(flight);
+
+        List<Double> passengers = takeValues();
+        List<SeatRow> seats = modelImp.getRows(plane.getModel());
+        for (int i = 0; i < passengers.size(); i++) {
+            if (i == 0 && passengers.get(i) < 80)
+                return;
+            DaoImp.getDaoPassenger(getApplicationContext()).insert(new Passenger( seats.get(i),
+                    DaoImp.getDaoFlight(getApplicationContext()).lastFlight() ,passengers.get(i) ));
+        }
 
     }
 
