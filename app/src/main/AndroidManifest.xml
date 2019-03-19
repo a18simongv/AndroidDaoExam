@@ -3,6 +3,7 @@
     package="com.example.daoandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -11,12 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.RegisterFlight"></activity>
-        <activity android:name=".activities.MultimediaFlights" />
+        <activity android:name=".activities.Flights"></activity>
+        <activity android:name=".activities.Information" />
         <activity android:name=".activities.CreatePlane" />
-        <activity android:name=".activities.OnFlight" />
-        <activity android:name=".activities.SeeFlights" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".CC_a18simongv">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

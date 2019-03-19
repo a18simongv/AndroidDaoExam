@@ -97,7 +97,7 @@ public class ModelImp implements ModelI {
 
         Cursor cursor = database.rawQuery("select * from cg_mass where name_model=?", new String[]{nameModel});
         while (cursor.moveToNext()) {
-            CgMass cgMass = new CgMass(cursor.getInt(0), nameModel, cursor.getDouble(2));
+            CgMass cgMass = new CgMass(cursor.getDouble(0), nameModel, cursor.getDouble(2));
             cgMasses.add(cgMass);
         }
         return cgMasses;
